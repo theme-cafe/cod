@@ -1,5 +1,8 @@
 Cash On Delivery service check extension which enables the COD Payment method if the service is available in particular area.
 
+You can also download this extesnion from magento connect by following the below url:
+http://www.magentocommerce.com/magento-connect/catalog/product/view/id/27569/
+
 This extension provides the facility to manage the Cash On Delivery service in particular area. Merchant can add the Area zipcode and COD service status via magneto admin panel. User can check with the availablility of COD service in particular area by zipcode through the form available at product view page and in category page left sidebar. The cash on delivery payment method will be automatically disabled as per the customer shipping address zipcode if the service is not available in that area.
 
 This change has two effects on the behaviour of a Magento site:
