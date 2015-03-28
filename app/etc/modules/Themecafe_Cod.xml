@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Themecafe_Cod>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Themecafe_Cod>
+    </modules>
+</config>

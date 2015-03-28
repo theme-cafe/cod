@@ -1,0 +1,92 @@
+<?php
+/**
+ * Theme Cafe
+ * http://www.theme-cafe.com
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@theme-cafe.com so we can send you a copy immediately.
+ *
+ * @category    Theme-cafe
+ * @package     Cash on delivery service check
+ * @author      Hemant Paliwal <support@mtheme-cafe.com>
+ * @copyright   Copyright (c) 2015 (http://www.theme-cafe.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<?php if (Mage::helper('cod')->getIsEnabled() && Mage::getStoreConfig('cod/codcheck/codform')==1 && Mage::getStoreConfig('payment/cashondelivery/active')==1) { ?>
+<div class="cod-check">
+<?php $session_cod = Mage::getSingleton('core/session')->getCodService(); 
+ $title = Mage::getStoreConfig('cod/codcheck/codform_title'); 
+ if(empty($title)){ 
+    $title = "Check for COD Service Availability : ";
+ }
+?>
+<h4><?php echo $title; ?></h4>
+<div class="cod-viewmore" id="cod-form-block" <?php if(!empty($session_cod)){ ?>style="display: none;" <?php } ?>>
+       <div class="cod-form">
+            <span>Pincode</span>
+			<input class="input-box" type="text" name="pincode" id="cod-pincode" value="" />
+	        <button type="button" class="button" id="cod-service-check" value=""><span><span>Check</span></span></button>
+	   </div>
+</div>
+<div class="cod-loader-img" id="cod-loader" style="display: none;" ></div>
+<div id="cod-msg-block" class="cod-service-msg-block" <?php if(empty($session_cod)){ ?>style="display: none;" <?php } ?>">
+	<span id="cod-msg"><?php echo Mage::getSingleton('core/session')->getCodMsg(); ?></span>
+	<span><a href="#" id="pincode-change">Change</a></span>
+</div>
+</div>
+<?php } ?>
+<script>window.jQuery || document.write('<script src="<?php echo $this->getSkinUrl('js/cod/jquery-1.7.2.min.js') ?>">\x3C/script>')</script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+   jQuery("#cod-service-check").click(function(e){
+	var ajaxcallurl ="<?php echo $this->getUrl('cod/index/cod/isajax/true') ?>";
+	var codpincode = jQuery('#cod-pincode').val(); 
+		 var isValid = false;
+		 if(codpincode != '')
+         isValid=true; 
+         if(isValid && codpincode.length<=9 && codpincode.length>=4){
+				isValid = /^(?:[A-Za-z0-9]+([-]?[A-Za-z0-9]+)*)?$/.test(codpincode);
+				var codpincode = jQuery('#cod-pincode').val(); 
+			    jQuery('#cod-form-block').hide();
+				jQuery('#cod-loader').show();
+			 			jQuery.ajax({
+						url:ajaxcallurl,
+						type:'POST',
+						datatype:'json',
+						data: {'pincode':codpincode},
+						success:function(data){
+								var obj = jQuery.parseJSON(data);
+								if(obj.FLAG == 1)
+								{ 
+								  jQuery("#cod-msg").text(obj.MSG);
+								}
+								else
+								{
+								  jQuery("#cod-msg").text(obj.MSG);
+								}
+						        jQuery('#cod-loader').hide();
+						        jQuery('#cod-msg-block').show();		
+							}
+						   });
+				}else{
+            	alert('Invalid ZipCode');
+            }
+	});
+            
+	jQuery('#pincode-change').click(function(e){
+			    e.preventDefault();
+			    jQuery('#cod-msg-block').hide();
+				jQuery('#cod-form-block').show();
+				jQuery('#cod-pincode').val('');
+    });
+});
+</script>

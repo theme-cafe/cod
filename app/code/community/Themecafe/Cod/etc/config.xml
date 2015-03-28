@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Theme Cafe
+ * http://www.theme-cafe.com
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@theme-cafe.com so we can send you a copy immediately.
+ *
+ * @category    Theme-cafe
+ * @package     Cash on delivery service check
+ * @author      Hemant Paliwal <support@mtheme-cafe.com>
+ * @copyright   Copyright (c) 2015 (http://www.theme-cafe.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+
+<config>
+    <modules>
+        <Themecafe_Cod>
+            <version>0.1.0</version>
+        </Themecafe_Cod>
+    </modules>
+    <frontend>
+        <events>
+            <payment_method_is_active>
+                <observers>
+                    <paymentfilter_payment_method_is_active>
+                        <type>singleton</type>
+                        <class>Themecafe_Cod_Model_Observer</class>
+                        <method>filterPaymentMethod</method>
+                    </paymentfilter_payment_method_is_active>
+                </observers>
+            </payment_method_is_active>
+	    </events>
+        <routers>
+            <cod>
+                <use>standard</use>
+                <args>
+                    <module>Themecafe_Cod</module>
+                    <frontName>cod</frontName>
+                </args>
+            </cod>
+        </routers>
+        <layout>
+            <updates>
+                <cod>
+                    <file>cod.xml</file>
+                </cod>
+            </updates>
+        </layout>
+    </frontend>
+    <backend>
+       
+    </backend>
+    <admin>
+        <routers>
+			<cod>
+				<use>admin</use>
+				<args>
+					<module>Themecafe_Cod</module>
+					<frontName>cod</frontName>
+				</args>
+			</cod>
+        </routers>
+    </admin>
+	<adminhtml>
+		<menu>
+			<cod module="cod">
+				<title>Cash On Delivery</title>
+				<sort_order>71</sort_order> 
+                <depends>
+		            <config>cod/codcheck/active</config>
+		        </depends>              
+				<children>
+					<items module="cod">
+						<title>Manage Details</title>
+						<sort_order>0</sort_order>
+						<action>cod/adminhtml_cod</action>
+					</items>
+				</children>
+			</cod>
+		</menu>
+        <acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<cod>
+                            <title>Cash On Delivery</title>
+                            <sort_order>10</sort_order>
+                            <children>
+                                <items>
+                                    <title>Manage Details</title>
+                                    <sort_order>0</sort_order>
+                                </items>
+                            </children>
+                        </cod>
+					</children>
+				</admin>
+			</resources>    
+		</acl>
+		<layout>
+			<updates>
+				<cod>
+					<file>cod.xml</file>
+				</cod>
+			</updates>
+		</layout>
+    </adminhtml>
+    <global>
+        <models>
+            <cod>
+                <class>Themecafe_Cod_Model</class>
+                <resourceModel>cod_mysql4</resourceModel>
+            </cod>
+            <cod_mysql4>
+                <class>Themecafe_Cod_Model_Mysql4</class>
+                <entities>
+                    <cod>
+                        <table>cod</table>
+                    </cod>
+                </entities>
+            </cod_mysql4>
+        </models>
+        <resources>
+            <cod_setup>
+                <setup>
+                    <module>Themecafe_Cod</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </cod_setup>
+            <cod_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </cod_write>
+            <cod_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </cod_read>
+        </resources>
+        <blocks>
+            <cod>
+                <class>Themecafe_Cod_Block</class>
+            </cod>
+        </blocks>
+        <helpers>
+            <cod>
+                <class>Themecafe_Cod_Helper</class>
+            </cod>
+        </helpers>
+        <events>
+			<admin_system_config_changed_section_cod>
+                <observers>
+                    <cod>
+                        <type>singleton</type>
+                        <class>Themecafe_Cod_Model_Observer</class>
+                        <method>adminSystemConfigChangedSection</method>
+                    </cod>
+                </observers>
+            </admin_system_config_changed_section_cod>
+        </events>
+     </global>
+	 <default>
+		<cod>
+		    <codcheck>                
+		        <active>0</active>   
+                <codform>1</codform>
+                <paymentmethod>1</paymentmethod>      
+		    </codcheck>      
+		</cod>
+	 </default>
+</config>

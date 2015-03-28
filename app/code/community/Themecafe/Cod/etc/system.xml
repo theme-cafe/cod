@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Theme Cafe
+ * http://www.theme-cafe.com
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@theme-cafe.com so we can send you a copy immediately.
+ *
+ * @category    Theme-cafe
+ * @package     Cash on delivery service check
+ * @author      Hemant Paliwal <support@mtheme-cafe.com>
+ * @copyright   Copyright (c) 2015 (http://www.theme-cafe.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <tabs>
+        <myconf translate="label">
+            <label>Themecafe</label>
+            <sort_order>150</sort_order>
+        </myconf>
+    </tabs>
+    <sections>
+        <cod translate="label" module="cod">
+        <label>COD Settings</label>
+            <tab>myconf</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+               <codcheck translate="label">
+                    <label>Cash On Delivery Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label comment">
+                            <label>Enabled</label>
+                            <comment>Select "Yes" to enable the module.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                       <heading_example translate="label">
+                            <label>Cash On Delivery Management</label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </heading_example>
+						<file translate="label comment">
+                            <label>File</label>
+                            <comment>Upload the csv file with area and pincode where COD service is available.</comment>
+                            <frontend_type>file</frontend_type>
+							<backend_model>adminhtml/system_config_backend_file</backend_model>
+                            <upload_dir>media/cod</upload_dir>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </file>
+						<export translate="label">
+							<label>Download Sample File</label>
+							<sort_order>55</sort_order>
+							<type>button</type>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<frontend_model>cod/adminhtml_system_config_downloadbutton</frontend_model>
+						</export>
+						<codform translate="label comment">
+                            <label>Display COD Check Form On Product View Page &amp; Sidebar</label>
+                            <comment>select 'Yes' to display Cash on delivery check form on view page &amp; Sidebar.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </codform>
+                        <codform_title translate="label comment">
+                            <label>Title To Display For COD Check Form On Product View Page &amp; Sidebar</label>
+                            <comment>Enter title to show on product view page.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </codform_title>
+                        <paymentmethod translate="label comment">
+                            <label>Hide "Cash On Delivery" Payment Method If Service Is Not Available In Entered Area</label>
+                            <comment>select 'Yes' to Hide cash on delivery method on checkout page if cod service is not available.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </paymentmethod>
+                    </fields>
+                </codcheck>
+            </groups>
+        </cod>
+    </sections>
+</config>
