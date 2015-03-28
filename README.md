@@ -6,7 +6,7 @@ This change has two effects on the behaviour of a Magento site:
 
 Installation
 
-Installation of COD Extension is the same as for most extensions, that is via your Magento Connect Manager using the extension key found on the MagentoCommerce site or directly via package upload if you are having package format. Important: Once installed you must refresh all caches and reindex all data (under System->Cache Management). You will then also need to logout then login of Admin (the COD Admin options will not be displayed otherwise).
+Installation of COD Extension is the same as for most extensions, that is via your Magento Connect Manager using the extension key found on the MagentoCommerce site or directly via package upload if you are having package format. Important: Once installed you must refresh all caches (under System->Cache Management). You will then also need to logout then login of Admin (the COD Admin options will not be displayed otherwise).
 
 There are also some COD configuration options under System->Configuration->THEMECAFE->COD Settings, and it's likely you will want to change these from their default values. What each option does should hopefully be self-explanatory.
 
